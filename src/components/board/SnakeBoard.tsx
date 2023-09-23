@@ -186,26 +186,12 @@ const SnakeBoard = () => {
       <Heading size="lg" color={"darkcyan"}>
         <Flex>
           <Flex width={"200px"} flexDirection={"row"} gap={"5px"}>
-            {!gameInProgress && (
-              <React.Fragment>
-                <Button
-                  onClick={startGame}
-                  className="playButton"
-                  bg="darkcyan"
-                  disabled={gameOver}
-                >
-                  Play
-                </Button>
-                <Button
-                  onClick={logout}
-                  className="playButton"
-                  bg="darkcyan"
-                  disabled={!gameInProgress}
-                >
-                  Logout
-                </Button>
-              </React.Fragment>
-            )}
+            <Button onClick={startGame} className="playButton" bg="darkcyan">
+              Play
+            </Button>
+            <Button onClick={logout} className="playButton" bg="darkcyan">
+              Logout
+            </Button>
           </Flex>
           <Container>
             <Flex justifyContent={"flex-end"}>
