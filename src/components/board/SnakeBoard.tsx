@@ -63,25 +63,24 @@ const SnakeBoard = () => {
         context.fillRect(apple[0], apple[1], 1, 1);
       }
     }
-  }, [apple, snake]);
+  }, [apple, scale, snake]);
 
   const startGame = () => {
-    if (!gameInProgress) {
-      setSnake(initialSnake);
-      setApple(initialApple);
-      setDirection(direction);
-      setDelay(initialDelay);
-      setScore(0);
-      setGameInProgress(!gameInProgress);
-      setGameOver(false);
-    } else {
-      setDelay(null);
-      setGameOver(true);
-      logScore();
-      dispatch({
-        type: "LOGOUT",
-      });
-    }
+    setSnake(initialSnake);
+    setApple(initialApple);
+    setDelay(initialDelay);
+    setDirection(direction);
+    setScore(0);
+    setGameInProgress(!gameInProgress);
+    setGameOver(false);
+  };
+
+  const logout = () => {
+    setDelay(null);
+    setGameOver(true);
+    dispatch({
+      type: "LOGOUT",
+    });
   };
 
   const checkBoundary = (snakeHeads: number[]) => {
@@ -131,6 +130,11 @@ const SnakeBoard = () => {
     if (checkBoundary(newSnakeHead)) {
       setDelay(null);
       setGameOver(true);
+      setGameInProgress(!gameInProgress);
+      dispatch({
+        type: "SET_DIRECTION",
+        payload: DIRECTION.right,
+      });
       logScore();
     }
     if (!isSnakeEating(newSnake)) {
@@ -181,16 +185,14 @@ const SnakeBoard = () => {
     >
       <Heading size="lg" color={"darkcyan"}>
         <Flex>
-          <Container width={"200px"}>
-            <Button
-              onClick={startGame}
-              className="playButton"
-              bg="darkcyan"
-              disabled={gameOver}
-            >
-              {gameInProgress ? "Logout" : "Play"}
+          <Flex width={"200px"} flexDirection={"row"} gap={"5px"}>
+            <Button onClick={startGame} className="playButton" bg="darkcyan">
+              Play
             </Button>
-          </Container>
+            <Button onClick={logout} className="playButton" bg="darkcyan">
+              Logout
+            </Button>
+          </Flex>
           <Container>
             <Flex justifyContent={"flex-end"}>
               <Center>Snake Game</Center>

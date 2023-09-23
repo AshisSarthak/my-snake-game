@@ -1,7 +1,8 @@
 {
   "name": "snake-game",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "https://ashissarthak.github.io/my-snake-game/",
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.1",
@@ -23,6 +24,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

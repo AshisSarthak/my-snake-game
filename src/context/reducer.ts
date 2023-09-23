@@ -19,6 +19,7 @@ export const reducer = (state: any, action: { type: any; payload: any }) => {
       return {
         ...state,
         userLoggedIn: false,
+        currentDirection: DIRECTION.right,
         currentUserName: "",
       };
     }

@@ -1,0 +1,21 @@
+# mac
+.DS_Store
+
+# generated content locations
+**/node_modules
+**/lib
+**/dist
+**/build/**
+
+# dev ops (unified-build) locations
+.gradle
+.settings
+.project
+nodejs
+yarn
+
+# logs
+*.log
+*.cache
+
+
