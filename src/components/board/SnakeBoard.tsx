@@ -63,21 +63,20 @@ const SnakeBoard = () => {
         context.fillRect(apple[0], apple[1], 1, 1);
       }
     }
-  }, [apple, snake]);
+  }, [apple, scale, snake]);
 
   const startGame = () => {
     if (!gameInProgress) {
       setSnake(initialSnake);
       setApple(initialApple);
-      setDirection(direction);
       setDelay(initialDelay);
+      setDirection(direction);
       setScore(0);
       setGameInProgress(!gameInProgress);
       setGameOver(false);
     } else {
       setDelay(null);
       setGameOver(true);
-      logScore();
       dispatch({
         type: "LOGOUT",
       });
@@ -131,6 +130,11 @@ const SnakeBoard = () => {
     if (checkBoundary(newSnakeHead)) {
       setDelay(null);
       setGameOver(true);
+      setGameInProgress(!gameInProgress);
+      dispatch({
+        type: "SET_DIRECTION",
+        payload: DIRECTION.right,
+      });
       logScore();
     }
     if (!isSnakeEating(newSnake)) {
