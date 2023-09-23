@@ -66,21 +66,21 @@ const SnakeBoard = () => {
   }, [apple, scale, snake]);
 
   const startGame = () => {
-    if (!gameInProgress) {
-      setSnake(initialSnake);
-      setApple(initialApple);
-      setDelay(initialDelay);
-      setDirection(direction);
-      setScore(0);
-      setGameInProgress(!gameInProgress);
-      setGameOver(false);
-    } else {
-      setDelay(null);
-      setGameOver(true);
-      dispatch({
-        type: "LOGOUT",
-      });
-    }
+    setSnake(initialSnake);
+    setApple(initialApple);
+    setDelay(initialDelay);
+    setDirection(direction);
+    setScore(0);
+    setGameInProgress(!gameInProgress);
+    setGameOver(false);
+  };
+
+  const logout = () => {
+    setDelay(null);
+    setGameOver(true);
+    dispatch({
+      type: "LOGOUT",
+    });
   };
 
   const checkBoundary = (snakeHeads: number[]) => {
@@ -185,16 +185,28 @@ const SnakeBoard = () => {
     >
       <Heading size="lg" color={"darkcyan"}>
         <Flex>
-          <Container width={"200px"}>
-            <Button
-              onClick={startGame}
-              className="playButton"
-              bg="darkcyan"
-              disabled={gameOver}
-            >
-              {gameInProgress ? "Logout" : "Play"}
-            </Button>
-          </Container>
+          <Flex width={"200px"} flexDirection={"row"} gap={"5px"}>
+            {!gameInProgress && (
+              <React.Fragment>
+                <Button
+                  onClick={startGame}
+                  className="playButton"
+                  bg="darkcyan"
+                  disabled={gameOver}
+                >
+                  Play
+                </Button>
+                <Button
+                  onClick={logout}
+                  className="playButton"
+                  bg="darkcyan"
+                  disabled={!gameInProgress}
+                >
+                  Logout
+                </Button>
+              </React.Fragment>
+            )}
+          </Flex>
           <Container>
             <Flex justifyContent={"flex-end"}>
               <Center>Snake Game</Center>

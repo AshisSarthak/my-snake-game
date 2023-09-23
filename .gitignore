@@ -5,6 +5,7 @@
 **/node_modules
 **/lib
 **/dist
+**/build/**
 
 # dev ops (unified-build) locations
 .gradle
